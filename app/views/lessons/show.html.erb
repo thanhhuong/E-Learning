@@ -1,0 +1,46 @@
+<h3 class="row">
+  <%= t ".all_lesson" %>
+</h3>
+
+<div class="event-vanue">
+    <table>
+        <div class="row", id="word_list">
+          <tr>
+            <td>
+              <%= t ".lesson_category_name" %>
+            </td>
+            <td>
+              <%= t ".lesson_results_answered" %>
+            </td>
+            <td>
+              <%= t ".lesson_create_time" %>
+            </td>
+            <td>
+              <%= t ".lesson_mark" %>
+            </td>
+          </tr>
+            <%= render @lesson %>
+        </div>
+    </table>
+</div>
+<% if @lesson.finished? %>
+  <div class="row">
+    <% @lesson.results.each_with_index do |result, index| %>
+      <div class="col-md-4 question" >
+        <%= index + 1 %>.&nbsp
+        <%= result.word.content %>  
+      </div>
+      <div class= "col-md-8">
+        <% if result.correct? %>
+          <div style="background-color: #ccffcc; padding: 10px; ">
+            <%= result.answer.content %>
+          </div>
+        <% else %>
+          <div style="background-color: #ffe6e6; padding: 10px;">
+            <%= t ".false_result" %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
